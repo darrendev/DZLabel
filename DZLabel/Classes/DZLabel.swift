@@ -219,7 +219,7 @@ import UIKit
                     if case .regex(let pattern) = type {
                         for result in DZRegex.resultsInText(dzText, pattern: pattern) {
                             if let keyword = self._substringWithNSRange(result.range, text: dzText) {
-                                let url = URL(fileURLWithPath: "\(DZRegex.CustomPrefix)\(keyword)")
+                                let url = URL(string: "\(DZRegex.CustomPrefix)\(keyword)")
                                 attributedStringGenerator.link(url: url, range: result.range)
                             }
                         }
@@ -279,8 +279,8 @@ import UIKit
             }
             return
         }
-        if url.absoluteString.hasPrefix(_filePrefix + DZRegex.CustomPrefix) {
-            if let str = (url.absoluteString as NSString).substring(from: (_filePrefix + DZRegex.CustomPrefix).count).removingPercentEncoding {
+        if url.absoluteString.hasPrefix(DZRegex.CustomPrefix) {
+            if let str = (url.absoluteString as NSString).substring(from: (DZRegex.CustomPrefix).count).removingPercentEncoding {
                 _regexKeywordTapHandler?(str)
             }
             return
